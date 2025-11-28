@@ -1,4 +1,4 @@
-🌾 Harvest Guard – কৃষক সহায়ক
+Harvest Guard – কৃষক সহায়ক
 
 A smart, beginner-friendly web application designed to help farmers in Bangladesh monitor crop conditions, weather forecasts, and essential farming data. The app provides an easy way to track harvest details, costs, notes, and get weather-based insights — all in Bangla, making it accessible to local farmers. Built for EDU HackFest 2025.
 
@@ -24,7 +24,7 @@ Works using LocalStorage — no backend needed
 
 Fully deployable on Vercel
 
-🛠 Technologies Used
+Technologies Used
 
 HTML5
 
