@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2D5016">
+    <meta name="description" content="বাংলাদেশী কৃষকদের জন্য কৃষি সহায়ক অ্যাপ - আবহাওয়া, ফসলের স্বাস্থ্য, বাজারদর এবং খরচ হিসাব">
+    <title>কৃষক সহায়ক - আপনার বিশ্বস্ত কৃষি সঙ্গী</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='75' font-size='75' fill='%232D5016'%3E🌾%3C/text%3E%3C/svg%3E">
+    <!-- Added Noto Sans Bengali font import in HTML head for optimal typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <span class="brand-icon">🌾</span>
+            <span class="brand-text">কৃষক সহায়ক</span>
+        </div>
+        <div class="navbar-menu" id="navMenu">
+            <button class="nav-btn" data-module="landing" onclick="showModule('landing')">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-label">বাড়ি</span>
+            </button>
+            <button class="nav-btn" data-module="weather" onclick="showModule('weather')">
+                <span class="nav-icon">🌤️</span>
+                <span class="nav-label">আবহাওয়া</span>
+            </button>
+            <button class="nav-btn" data-module="crops" onclick="showModule('crops')">
+                <span class="nav-icon">🌾</span>
+                <span class="nav-label">ফসল</span>
+            </button>
+            <button class="nav-btn" data-module="cost" onclick="showModule('cost')">
+                <span class="nav-icon">💰</span>
+                <span class="nav-label">খরচ</span>
+            </button>
+            <button class="nav-btn" data-module="market" onclick="showModule('market')">
+                <span class="nav-icon">📊</span>
+                <span class="nav-label">বাজার</span>
+            </button>
+            <button class="nav-btn" data-module="notes" onclick="showModule('notes')">
+                <span class="nav-icon">📝</span>
+                <span class="nav-label">নোট</span>
+            </button>
+            <button class="nav-btn settings-btn" onclick="toggleSettings()">
+                <span class="nav-icon">⚙️</span>
+                <span class="nav-label">সেটিংস</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="main-container">
+        
+        <!-- MODULE A1: LANDING PAGE WITH STORYTELLING -->
+        <section id="landing" class="module active">
+            <div class="landing-hero">
+                <div class="hero-content">
+                    <h1 class="hero-title">বাংলাদেশে খাদ্য নিরাপত্তার সংকট</h1>
+                    <p class="hero-subtitle">প্রতি বছর লক্ষ লক্ষ টন শস্য নষ্ট হয়। আমরা তা বন্ধ করতে এসেছি।</p>
+                </div>
+                <div class="hero-image">
+                    <div class="illustration-box">
+                        <div class="farm-scene">
+                            <div class="sun"></div>
+                            <div class="cloud"></div>
+                            <div class="crop crop-1"></div>
+                            <div class="crop crop-2"></div>
+                            <div class="ground"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-cards">
+                <div class="story-card">
+                    <div class="story-number">০১</div>
+                    <h3>তথ্য সংগ্রহ করুন</h3>
+                    <p>আবহাওয়া, মাটির অবস্থা এবং ফসলের তথ্য নিয়মিত আপডেট করুন</p>
+                    <div class="story-icon">📱</div>
+                </div>
+                <div class="story-card">
+                    <div class="story-number">০२</div>
+                    <h3>সতর্কতা পান</h3>
+                    <p>আমাদের এআই সিস্টেম ঝুঁকি সনাক্ত করে তাৎক্ষণিক পরামর্শ দেয়</p>
+                    <div class="story-icon">⚠️</div>
+                </div>
+                <div class="story-card">
+                    <div class="story-number">०३</div>
+                    <h3>পদক্ষেপ নিন</h3>
+                    <p>সুপারিশকৃত সমাধান অনুসরণ করে ফসল রক্ষা করুন</p>
+                    <div class="story-icon">✅</div>
+                </div>
+                <div class="story-card">
+                    <div class="story-number">०४</div>
+                    <h3>খাদ্য সংরক্ষণ করুন</h3>
+                    <p>হাজার হাজার পরিবারের খাদ্য সুরক্ষায় অবদান রাখুন</p>
+                    <div class="story-icon">🌾</div>
+                </div>
+            </div>
+
+            <div class="emergency-hotline">
+                <h3>জরুরি যোগাযোগ</h3>
+                <div class="hotline-grid">
+                    <div class="hotline-card">
+                        <div class="hotline-title">কৃষি কর্মকর্তা</div>
+                        <div class="hotline-number">১৬১২৩</div>
+                    </div>
+                    <div class="hotline-card">
+                        <div class="hotline-title">রোগবালাই তথ্য</div>
+                        <div class="hotline-number">১৬১২৩</div>
+                    </div>
+                    <div class="hotline-card">
+                        <div class="hotline-title">কৃষি কল সেন্টার</div>
+                        <div class="hotline-number">১৬১२३</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <button class="btn btn-primary" onclick="showModule('farmer-register')">শুরু করুন</button>
+                <button class="btn btn-secondary" onclick="showModule('weather')">সরাসরি যান</button>
+            </div>
+        </section>
+
+        <!-- MODULE A2: FARMER REGISTRATION & PROFILE -->
+        <section id="farmer-register" class="module">
+            <h2 class="module-title">কৃষক নিবন্ধন</h2>
+            
+            <form class="form-container" id="farmerForm">
+                <div class="form-group">
+                    <label for="farmerName">আপনার নাম</label>
+                    <input type="text" id="farmerName" placeholder="নাম লিখুন" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="farmerEmail">ইমেইল (ঐচ্ছিক)</label>
+                    <input type="email" id="farmerEmail" placeholder="ইমেইল (প্রয়োজনীয় নয়)">
+                </div>
+
+                <div class="form-group">
+                    <label for="farmerPhone">ফোন নম্বর</label>
+                    <input type="tel" id="farmerPhone" placeholder="০১XXXXXXXXX" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="farmerDivision">বিভাগ নির্বাচন করুন</label>
+                    <select id="farmerDivision" required>
+                        <option value="">-- নির্বাচন করুন --</option>
+                        <option value="dhaka">ঢাকা</option>
+                        <option value="chittagong">চট্টগ্রাম</option>
+                        <option value="sylhet">সিলেট</option>
+                        <option value="rajshahi">রাজশাহী</option>
+                        <option value="khulna">খুলনা</option>
+                        <option value="barishal">বরিশাল</option>
+                        <option value="rangpur">রংপুর</option>
+                        <option value="mymensingh">ময়মনসিংহ</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="farmerLanguage">পছন্দের ভাষা</label>
+                    <select id="farmerLanguage" required>
+                        <option value="bengali">বাংলা</option>
+                        <option value="english">English</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full">নিবন্ধন সম্পন্ন করুন</button>
+            </form>
+
+            <div id="farmerProfile" class="farmer-profile" style="display:none;">
+                <h3>আপনার প্রোফাইল</h3>
+                <div class="profile-info">
+                    <p><strong>নাম:</strong> <span id="profileName"></span></p>
+                    <p><strong>ইমেইল:</strong> <span id="profileEmail"></span></p>
+                    <p><strong>ফোন:</strong> <span id="profilePhone"></span></p>
+                    <p><strong>বিভাগ:</strong> <span id="profileDivision"></span></p>
+                </div>
+                <div class="profile-badges">
+                    <h4>ব্যাজ</h4>
+                    <div id="badgesContainer" class="badges-grid"></div>
+                </div>
+                <button class="btn btn-secondary" onclick="editFarmerProfile()">সম্পাদনা করুন</button>
+            </div>
+        </section>
+
+        <!-- MODULE A2b: CROP BATCH MANAGEMENT -->
+        <section id="crop-batch" class="module">
+            <h2 class="module-title">ফসল ব্যাচ পরিচালনা</h2>
+            
+            <form class="form-container" id="cropBatchForm">
+                <div class="form-group">
+                    <label for="cropType">ফসলের ধরন</label>
+                    <select id="cropType" required>
+                        <option value="">-- নির্বাচন করুন --</option>
+                        <option value="rice">ধান</option>
+                        <option value="vegetables">সবজি</option>
+                        <option value="potato">আলু</option>
+                        <option value="wheat">গম</option>
+                        <option value="corn">ভুট্টা</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="estimatedWeight">আনুমানিক ওজন (কেজি)</label>
+                    <input type="number" id="estimatedWeight" placeholder="ওজন লিখুন" min="0" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="harvestDate">ফসল কাটার তারিখ</label>
+                    <input type="date" id="harvestDate" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="storageType">সংরক্ষণ ধরন</label>
+                    <select id="storageType" required>
+                        <option value="">-- নির্বাচন করুন --</option>
+                        <option value="jute">পাটের বস্তা স্ট্যাক</option>
+                        <option value="silo">সাইলো</option>
+                        <option value="open">খোলা স্থান</option>
+                        <option value="warehouse">গুদাম</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full">ব্যাচ যুক্ত করুন</button>
+            </form>
+
+            <div id="batchesList" class="batches-list"></div>
+        </section>
+
+        <!-- MODULE 1: WEATHER INFORMATION -->
+        <section id="weather" class="module">
+            <h2 class="module-title">আবহাওয়া তথ্য</h2>
+            
+            <div class="weather-controls">
+                <div class="location-input-group">
+                    <input type="text" id="locationInput" placeholder="এলাকা খুঁজুন" class="location-input">
+                    <button class="btn btn-secondary" onclick="getWeatherByLocation()">খুঁজুন</button>
+                    <button class="btn btn-secondary" onclick="getWeatherByGPS()" title="আপনার অবস্থান ব্যবহার করুন">📍</button>
+                </div>
+            </div>
+
+            <div id="weatherError" class="error-message" style="display:none;"></div>
+
+            <div id="weatherWidget" class="weather-widget" style="display:none;">
+                <div class="weather-header">
+                    <h3 id="weatherLocation"></h3>
+                    <p id="weatherTime"></p>
+                </div>
+
+                <div class="weather-main">
+                    <div class="temperature-display">
+                        <span id="weatherTemp" class="temp-value"></span>
+                        <span class="temp-unit">°সি</span>
+                    </div>
+                    <div class="weather-description">
+                        <p id="weatherDesc"></p>
+                    </div>
+                </div>
+
+                <div class="weather-cards">
+                    <div class="weather-card">
+                        <div class="card-icon">💧</div>
+                        <div class="card-label">আর্দ্রতা</div>
+                        <div class="card-value" id="weatherHumidity"></div>
+                    </div>
+                    <div class="weather-card">
+                        <div class="card-icon">🌧️</div>
+                        <div class="card-label">বৃষ্টির সম্ভাবনা</div>
+                        <div class="card-value" id="weatherRain"></div>
+                    </div>
+                    <div class="weather-card">
+                        <div class="card-icon">💨</div>
+                        <div class="card-label">বায়ু গতি</div>
+                        <div class="card-value" id="weatherWind"></div>
+                    </div>
+                    <div class="weather-card">
+                        <div class="card-icon">🌬️</div>
+                        <div class="card-label">চাপ</div>
+                        <div class="card-value" id="weatherPressure"></div>
+                    </div>
+                </div>
+
+                <!-- Weather Advisory -->
+                <div class="weather-advisory" id="weatherAdvisory"></div>
+
+                <!-- 5-Day Forecast -->
+                <div class="forecast-section">
+                    <h4>৫ দিনের পূর্বাভাস</h4>
+                    <div id="forecastContainer" class="forecast-grid"></div>
+                </div>
+            </div>
+
+            <div id="weatherPlaceholder" class="placeholder-message">
+                <p>আপনার এলাকার আবহাওয়া জানতে অবস্থান খুঁজুন বা স্বয়ংক্রিয় সনাক্তকরণ ব্যবহার করুন</p>
+            </div>
+        </section>
+
+        <!-- MODULE 2: CROP HEALTH HELP -->
+        <section id="crops" class="module">
+            <h2 class="module-title">ফসলের স্বাস্থ্য সহায়তা</h2>
+
+            <div class="crop-selector">
+                <label for="cropSelect">ফসল নির্বাচন করুন:</label>
+                <select id="cropSelect" onchange="showCropInfo()">
+                    <option value="">-- নির্বাচন করুন --</option>
+                    <option value="rice">ধান</option>
+                    <option value="vegetables">সবজি</option>
+                    <option value="potato">আলু</option>
+                    <option value="wheat">গম</option>
+                </select>
+            </div>
+
+            <div id="cropInfoContainer" class="crop-info-container" style="display:none;">
+                <div class="crop-diseases">
+                    <h3 id="cropTitle"></h3>
+                    <div id="diseaseList" class="disease-cards"></div>
+                </div>
+            </div>
+
+            <div id="noCropSelected" class="placeholder-message">
+                <p>ফসল নির্বাচন করুন রোগের তথ্য দেখতে</p>
+            </div>
+        </section>
+
+        <!-- MODULE 3: COST CALCULATOR -->
+        <section id="cost" class="module">
+            <h2 class="module-title">কৃষি খরচ হিসাব</h2>
+
+            <div class="cost-input-form">
+                <div class="form-group">
+                    <label for="expenseDate">তারিখ</label>
+                    <input type="date" id="expenseDate" value="">
+                </div>
+
+                <div class="form-group">
+                    <label for="expenseCategory">খরচের ধরন</label>
+                    <select id="expenseCategory">
+                        <option value="">-- নির্বাচন করুন --</option>
+                        <option value="seed">বীজ</option>
+                        <option value="fertilizer">সার</option>
+                        <option value="pesticide">কীটনাশক</option>
+                        <option value="labor">শ্রমিক</option>
+                        <option value="water">পানি</option>
+                        <option value="equipment">যন্ত্রপাতি</option>
+                        <option value="transport">পরিবহন</option>
+                        <option value="other">অন্যান্য</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="expenseAmount">টাকার পরিমাণ</label>
+                    <input type="number" id="expenseAmount" placeholder="০" min="0" step="0.01">
+                </div>
+
+                <div class="form-group">
+                    <label for="expenseDescription">বিবরণ (ঐচ্ছিক)</label>
+                    <input type="text" id="expenseDescription" placeholder="কী কিনলেন?">
+                </div>
+
+                <button class="btn btn-primary btn-full" onclick="addExpense()">খরচ যুক্ত করুন</button>
+            </div>
+
+            <div class="cost-summary">
+                <div class="summary-card">
+                    <h4>মোট খরচ</h4>
+                    <p class="summary-value" id="totalCost">० টাকা</p>
+                </div>
+                <button class="btn btn-secondary" onclick="clearAllExpenses()">সব সাফ করুন</button>
+            </div>
+
+            <div class="cost-table">
+                <h4>খরচের বিবরণী</h4>
+                <div id="costTableContainer" class="table-container">
+                    <p class="placeholder-message">কোনো খরচ নেই</p>
+                </div>
+            </div>
+
+            <!-- Cost Chart -->
+            <div class="cost-chart-container">
+                <h4>খরচ বিশ্লেষণ</h4>
+                <canvas id="costChart" width="400" height="200"></canvas>
+            </div>
+        </section>
+
+        <!-- MODULE 4: MARKET PRICES -->
+        <section id="market" class="module">
+            <h2 class="module-title">বাজারদর তথ্য</h2>
+
+            <div class="market-info">
+                <p>আজকের বাজার মূল্য (প্রতি মন)</p>
+                <p class="market-date" id="marketDate"></p>
+            </div>
+
+            <div id="priceList" class="price-cards-grid">
+                <!-- Prices will be populated here -->
+            </div>
+
+            <div class="market-advisory">
+                <h4>বাজারের পরামর্শ</h4>
+                <div id="marketAdvice" class="advice-text"></div>
+            </div>
+        </section>
+
+        <!-- MODULE 5: FARMER NOTES -->
+        <section id="notes" class="module">
+            <h2 class="module-title">কৃষকের নোটবুক</h2>
+
+            <div class="notes-input">
+                <textarea id="notesInput" placeholder="আপনার নোট লিখুন..." class="notes-textarea"></textarea>
+                <button class="btn btn-primary" onclick="saveNote()">নোট সংরক্ষণ করুন</button>
+            </div>
+
+            <div id="notesList" class="notes-list">
+                <!-- Notes will be listed here -->
+            </div>
+        </section>
+
+        <!-- SETTINGS & FEATURES -->
+        <section id="settings" class="module">
+            <h2 class="module-title">সেটিংস এবং বিকল্প</h2>
+
+            <div class="settings-grid">
+                <div class="setting-card">
+                    <h4>🌙 রাত মোড</h4>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="darkModeToggle" onchange="toggleDarkMode()">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-card">
+                    <h4>👁️ রঙ-অন্ধ বান্ধব মোড</h4>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="colorBlindToggle" onchange="toggleColorBlind()">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-card">
+                    <h4>📏 ফন্ট আকার</h4>
+                    <button class="btn btn-secondary" onclick="increaseFontSize()">বড় অক্ষর +</button>
+                    <button class="btn btn-secondary" onclick="decreaseFontSize()">ছোট অক্ষর -</button>
+                </div>
+
+                <div class="setting-card">
+                    <h4>🔊 টেক্সট-টু-স্পীচ</h4>
+                    <button class="btn btn-secondary" onclick="toggleTextToSpeech()">কণ্ঠস্বর চালু করুন</button>
+                </div>
+
+                <div class="setting-card">
+                    <h4>📲 অফলাইন মোড</h4>
+                    <p id="offlineStatus">অনলাইন</p>
+                    <p class="setting-description">অ্যাপটি প্রথম লোড করার পরে অফলাইনে কাজ করে</p>
+                </div>
+
+                <div class="setting-card">
+                    <h4>💾 ডেটা ম্যানেজমেন্ট</h4>
+                    <button class="btn btn-secondary" onclick="exportData()">ডেটা এক্সপোর্ট করুন</button>
+                    <button class="btn btn-danger" onclick="resetData()">সব ডেটা মুছুন</button>
+                </div>
+            </div>
+
+            <div class="about-section">
+                <h4>অ্যাপ সম্পর্কে</h4>
+                <p><strong>কৃষক সহায়ক</strong></p>
+                <p>সংস্করণ: ১.০.०</p>
+                <p>একটি খোলা উৎস প্রকল্প ডিউ হ্যাকফেস্ট २०२५ এর জন্য</p>
+                <p>GitHub: <a href="https://github.com" target="_blank">github.com/krishak-sahayak</a></p>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

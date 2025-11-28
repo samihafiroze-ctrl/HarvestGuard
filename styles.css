@@ -1,0 +1,1315 @@
+/* ============================================
+   KRISHI SAHAYAK - Farmer Helper App
+   Bangladeshi Agricultural Color Palette
+   Mobile-First Responsive Design
+   ============================================ */
+
+/* BANGLA NUMERALS CONVERSION MAP (via CSS & JS) */
+:root {
+  /* Agricultural Color Palette */
+  --color-primary-green: #2d5016; /* Rich agricultural green */
+  --color-secondary-gold: #d4a574; /* Golden paddy */
+  --color-tertiary-brown: #8b6f47; /* Soil brown */
+  --color-accent-sky: #87ceeb; /* Sky blue */
+  --color-light-bg: #f5f3f0; /* Off-white background */
+  --color-text-dark: #2c2c2c; /* Dark text */
+  --color-text-light: #ffffff; /* Light text */
+  --color-border: #e0d5c7; /* Soft border */
+  --color-error: #d32f2f; /* Error/danger red */
+  --color-success: #388e3c; /* Success green */
+
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+
+  /* Typography */
+  --font-primary: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --font-size-base: 16px;
+  --font-size-sm: 14px;
+  --font-size-lg: 18px;
+  --font-size-xl: 22px;
+  --font-size-xxl: 28px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
+
+  /* Transitions */
+  --transition: all 0.3s ease;
+}
+
+/* Dark Mode */
+body.dark-mode {
+  --color-light-bg: #1a1a1a;
+  --color-text-dark: #f5f3f0;
+  --color-text-light: #1a1a1a;
+  --color-border: #3d3d3d;
+}
+
+/* Color-Blind Friendly Mode */
+body.color-blind-mode {
+  --color-primary-green: #0173b2; /* Blue */
+  --color-secondary-gold: #de8f05; /* Orange */
+  --color-tertiary-brown: #cc78bc; /* Purple */
+  --color-accent-sky: #ca9161; /* Brown */
+}
+
+/* ============================================
+   GLOBAL STYLES
+   ============================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-primary);
+  background-color: var(--color-light-bg);
+  color: var(--color-text-dark);
+  line-height: 1.6;
+  transition: var(--transition);
+}
+
+/* ============================================
+   TYPOGRAPHY & BANGLA NUMERALS
+   ============================================ */
+
+/* Added Noto Sans Bengali font import */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap");
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: var(--spacing-md);
+  font-weight: 700;
+  color: var(--color-primary-green);
+}
+
+h1 {
+  font-size: var(--font-size-xxl);
+}
+h2 {
+  font-size: var(--font-size-xl);
+}
+h3 {
+  font-size: var(--font-size-lg);
+}
+
+p {
+  margin-bottom: var(--spacing-sm);
+}
+
+/* Bangla Numeral specific styling - applies Noto Sans Bengali only to Bangla digits */
+.bn-number {
+  font-family: "Noto Sans Bengali", "Segoe UI", sans-serif;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================
+   NAVIGATION BAR
+   ============================================ */
+
+.navbar {
+  background-color: var(--color-primary-green);
+  color: var(--color-text-light);
+  padding: var(--spacing-sm);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-md);
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+}
+
+.brand-icon {
+  font-size: 28px;
+}
+
+.navbar-menu {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-sm);
+  overflow-x: auto;
+}
+
+@media (max-width: 768px) {
+  .navbar-menu {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-menu {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.nav-btn {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: var(--color-text-light);
+  border: 2px solid transparent;
+  border-radius: 8px;
+  padding: var(--spacing-sm);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  transition: var(--transition);
+  min-height: 70px;
+  justify-content: center;
+}
+
+.nav-btn:hover,
+.nav-btn.active {
+  background-color: var(--color-secondary-gold);
+  color: var(--color-primary-green);
+  border-color: var(--color-text-light);
+  transform: translateY(-2px);
+}
+
+.nav-icon {
+  font-size: 24px;
+}
+
+.nav-label {
+  font-size: 12px;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* ============================================
+   MAIN CONTAINER & MODULES
+   ============================================ */
+
+.main-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--spacing-md);
+  min-height: calc(100vh - 200px);
+}
+
+.module {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.module.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.module-title {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 3px solid var(--color-secondary-gold);
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+
+.btn {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: none;
+  border-radius: 8px;
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background-color: var(--color-primary-green);
+  color: var(--color-text-light);
+}
+
+.btn-primary:hover {
+  background-color: #1f3a0f;
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background-color: var(--color-secondary-gold);
+  color: var(--color-primary-green);
+}
+
+.btn-secondary:hover {
+  background-color: #b89968;
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.btn-danger {
+  background-color: var(--color-error);
+  color: var(--color-text-light);
+}
+
+.btn-danger:hover {
+  background-color: #b71c1c;
+}
+
+.btn-full {
+  width: 100%;
+}
+
+/* ============================================
+   FORMS
+   ============================================ */
+
+.form-container {
+  background-color: var(--color-text-light);
+  padding: var(--spacing-lg);
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.form-group {
+  margin-bottom: var(--spacing-md);
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  font-weight: 600;
+  color: var(--color-primary-green);
+  font-size: var(--font-size-lg);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: var(--spacing-sm);
+  border: 2px solid var(--color-border);
+  border-radius: 8px;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  background-color: var(--color-light-bg);
+  color: var(--color-text-dark);
+  transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--color-primary-green);
+  box-shadow: 0 0 0 3px rgba(45, 80, 22, 0.1);
+}
+
+/* ============================================
+   LANDING PAGE (MODULE A1)
+   ============================================ */
+
+.landing-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-lg);
+  align-items: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+@media (max-width: 768px) {
+  .landing-hero {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hero-content {
+  padding: var(--spacing-md);
+}
+
+.hero-title {
+  font-size: var(--font-size-xxl);
+  color: var(--color-primary-green);
+  margin-bottom: var(--spacing-md);
+  line-height: 1.2;
+}
+
+.hero-subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--color-tertiary-brown);
+  line-height: 1.5;
+}
+
+.hero-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.illustration-box {
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1;
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.farm-scene {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.sun {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background-color: #ffd700;
+  border-radius: 50%;
+  animation: float 3s ease-in-out infinite;
+}
+
+.cloud {
+  position: absolute;
+  top: 40px;
+  left: 30px;
+  width: 60px;
+  height: 30px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 30px;
+  animation: drift 6s ease-in-out infinite;
+}
+
+.crop {
+  position: absolute;
+  bottom: 20px;
+  width: 30px;
+  height: 60px;
+  background: linear-gradient(to top, #d4a574 0%, #8fbc8f 100%);
+  border-radius: 50% 50% 0 0;
+  animation: sway 2s ease-in-out infinite;
+}
+
+.crop-1 {
+  left: 20%;
+  animation-delay: 0s;
+}
+
+.crop-2 {
+  right: 20%;
+  animation-delay: 0.5s;
+}
+
+.ground {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 30px;
+  background-color: #8b6f47;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(20px);
+  }
+}
+
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(1deg);
+  }
+  75% {
+    transform: rotate(-1deg);
+  }
+}
+
+.story-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+}
+
+@media (max-width: 768px) {
+  .story-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+.story-card {
+  background-color: var(--color-text-light);
+  border-left: 4px solid var(--color-secondary-gold);
+  padding: var(--spacing-md);
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.story-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.story-number {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-secondary-gold);
+  margin-bottom: var(--spacing-xs);
+}
+
+.story-card h3 {
+  color: var(--color-primary-green);
+  margin-bottom: var(--spacing-sm);
+}
+
+.story-icon {
+  font-size: 40px;
+  text-align: right;
+  margin-top: var(--spacing-md);
+}
+
+.emergency-hotline {
+  background-color: var(--color-error);
+  color: var(--color-text-light);
+  padding: var(--spacing-lg);
+  border-radius: 12px;
+  margin-bottom: var(--spacing-xl);
+}
+
+.emergency-hotline h3 {
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-md);
+}
+
+.hotline-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-md);
+}
+
+@media (max-width: 768px) {
+  .hotline-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hotline-card {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: var(--spacing-md);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.hotline-title {
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--spacing-xs);
+}
+
+.hotline-number {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+}
+
+.cta-section {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ============================================
+   WEATHER MODULE
+   ============================================ */
+
+.weather-controls {
+  margin-bottom: var(--spacing-lg);
+}
+
+.location-input-group {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: var(--spacing-sm);
+}
+
+@media (max-width: 480px) {
+  .location-input-group {
+    grid-template-columns: 1fr auto;
+  }
+}
+
+.location-input {
+  padding: var(--spacing-sm);
+  border: 2px solid var(--color-border);
+  border-radius: 8px;
+  font-size: var(--font-size-base);
+  background-color: var(--color-text-light);
+  color: var(--color-text-dark);
+}
+
+.weather-widget {
+  background: linear-gradient(135deg, var(--color-primary-green), var(--color-accent-sky));
+  color: var(--color-text-light);
+  border-radius: 16px;
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.weather-header {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.weather-header h3 {
+  color: var(--color-text-light);
+  font-size: var(--font-size-xl);
+}
+
+.weather-header p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: var(--font-size-sm);
+}
+
+.weather-main {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.temperature-display {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-sm);
+}
+
+.temp-value {
+  font-size: 60px;
+  font-weight: 700;
+}
+
+.temp-unit {
+  font-size: var(--font-size-xl);
+}
+
+.weather-description {
+  font-size: var(--font-size-lg);
+}
+
+.weather-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.weather-card {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: var(--spacing-md);
+  text-align: center;
+}
+
+.card-icon {
+  font-size: 32px;
+  margin-bottom: var(--spacing-xs);
+}
+
+.card-label {
+  font-size: var(--font-size-sm);
+  opacity: 0.9;
+  margin-bottom: var(--spacing-xs);
+}
+
+.card-value {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+}
+
+.weather-advisory {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-left: 4px solid var(--color-secondary-gold);
+  padding: var(--spacing-md);
+  border-radius: 8px;
+  margin-bottom: var(--spacing-lg);
+}
+
+.forecast-section {
+  margin-top: var(--spacing-lg);
+}
+
+.forecast-section h4 {
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-md);
+}
+
+.forecast-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--spacing-sm);
+}
+
+@media (max-width: 480px) {
+  .forecast-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.forecast-card {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  padding: var(--spacing-sm);
+  text-align: center;
+  font-size: var(--font-size-sm);
+}
+
+.forecast-day {
+  font-weight: 600;
+  margin-bottom: var(--spacing-xs);
+}
+
+.forecast-icon {
+  font-size: 28px;
+  margin-bottom: var(--spacing-xs);
+}
+
+.forecast-temp {
+  font-size: var(--font-size-sm);
+}
+
+.error-message {
+  background-color: var(--color-error);
+  color: var(--color-text-light);
+  padding: var(--spacing-md);
+  border-radius: 8px;
+  margin-bottom: var(--spacing-md);
+}
+
+.placeholder-message {
+  text-align: center;
+  padding: var(--spacing-xl);
+  color: #666;
+  font-style: italic;
+}
+
+/* ============================================
+   CROP HEALTH MODULE
+   ============================================ */
+
+.crop-selector {
+  margin-bottom: var(--spacing-lg);
+  background-color: var(--color-text-light);
+  padding: var(--spacing-md);
+  border-radius: 8px;
+}
+
+.crop-selector label {
+  display: block;
+  margin-bottom: var(--spacing-sm);
+  font-weight: 600;
+  color: var(--color-primary-green);
+}
+
+.crop-info-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+}
+
+.crop-diseases {
+  background-color: var(--color-text-light);
+  padding: var(--spacing-lg);
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+}
+
+.disease-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+}
+
+.disease-card {
+  border-left: 4px solid var(--color-secondary-gold);
+  padding: var(--spacing-md);
+  background-color: var(--color-light-bg);
+  border-radius: 8px;
+  transition: var(--transition);
+}
+
+.disease-card:hover {
+  transform: translateX(4px);
+  box-shadow: var(--shadow-md);
+}
+
+.disease-name {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-primary-green);
+  margin-bottom: var(--spacing-sm);
+}
+
+.disease-symptoms {
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.disease-symptoms strong {
+  color: var(--color-error);
+}
+
+.disease-solution {
+  background-color: rgba(56, 142, 60, 0.1);
+  padding: var(--spacing-sm);
+  border-radius: 6px;
+  color: var(--color-success);
+  font-weight: 600;
+}
+
+/* ============================================
+   COST CALCULATOR MODULE
+   ============================================ */
+
+.cost-input-form {
+  background-color: var(--color-text-light);
+  padding: var(--spacing-lg);
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.cost-summary {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  align-items: center;
+}
+
+.summary-card {
+  background: linear-gradient(135deg, var(--color-primary-green), var(--color-secondary-gold));
+  color: var(--color-text-light);
+  padding: var(--spacing-lg);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.summary-card h4 {
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-sm);
+}
+
+.summary-value {
+  font-size: var(--font-size-xxl);
+  font-weight: 700;
+}
+
+.cost-table {
+  background-color: var(--color-text-light);
+  padding: var(--spacing-lg);
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.cost-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--color-border);
+  align-items: center;
+}
+
+.cost-row:last-child {
+  border-bottom: none;
+}
+
+.cost-delete-btn {
+  background-color: var(--color-error);
+  color: var(--color-text-light);
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.cost-chart-container {
+  background-color: var(--color-text-light);
+  padding: var(--spacing-lg);
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  text-align: center;
+}
+
+/* ============================================
+   MARKET PRICES MODULE
+   ============================================ */
+
+.market-info {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.market-date {
+  color: #666;
+  font-size: var(--font-size-sm);
+}
+
+.price-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+@media (max-width: 768px) {
+  .price-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.price-card {
+  background: linear-gradient(135deg, var(--color-secondary-gold), var(--color-tertiary-brown));
+  color: var(--color-text-light);
+  padding: var(--spacing-lg);
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+}
+
+.price-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.price-crop-name {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+}
+
+.price-amount {
+  font-size: var(--font-size-xxl);
+  font-weight: 700;
+  margin-bottom: var(--spacing-xs);
+}
+
+.price-unit {
+  font-size: var(--font-size-sm);
+  opacity: 0.9;
+}
+
+.market-advisory {
+  background-color: var(--color-text-light);
+  padding: var(--spacing-lg);
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+}
+
+.market-advisory h4 {
+  margin-bottom: var(--spacing-md);
+}
+
+.advice-text {
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  color: var(--color-text-dark);
+}
+
+/* ============================================
+   FARMER NOTES MODULE
+   ============================================ */
+
+.notes-input {
+  background-color: var(--color-text-light);
+  padding: var(--spacing-lg);
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.notes-textarea {
+  width: 100%;
+  min-height: 150px;
+  padding: var(--spacing-md);
+  border: 2px solid var(--color-border);
+  border-radius: 8px;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  resize: vertical;
+  margin-bottom: var(--spacing-md);
+}
+
+.notes-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+}
+
+.note-card {
+  background-color: var(--color-text-light);
+  border-left: 4px solid var(--color-primary-green);
+  padding: var(--spacing-md);
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+}
+
+.note-text {
+  color: var(--color-text-dark);
+  margin-bottom: var(--spacing-sm);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.note-date {
+  font-size: var(--font-size-sm);
+  color: #999;
+  margin-bottom: var(--spacing-sm);
+}
+
+.note-delete-btn {
+  background-color: var(--color-error);
+  color: var(--color-text-light);
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+/* ============================================
+   FARMER PROFILE & SETTINGS
+   ============================================ */
+
+.farmer-profile {
+  background-color: var(--color-text-light);
+  padding: var(--spacing-lg);
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  margin-top: var(--spacing-lg);
+}
+
+.profile-info {
+  margin-bottom: var(--spacing-lg);
+  background-color: var(--color-light-bg);
+  padding: var(--spacing-md);
+  border-radius: 8px;
+}
+
+.profile-info p {
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-base);
+}
+
+.profile-badges {
+  margin-bottom: var(--spacing-lg);
+}
+
+.badges-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+.badge {
+  background-color: var(--color-secondary-gold);
+  color: var(--color-primary-green);
+  padding: var(--spacing-md);
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+}
+
+.settings-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.setting-card {
+  background-color: var(--color-text-light);
+  padding: var(--spacing-lg);
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+}
+
+.setting-card h4 {
+  margin-bottom: var(--spacing-md);
+  color: var(--color-primary-green);
+}
+
+.setting-description {
+  font-size: var(--font-size-sm);
+  color: #666;
+  margin-top: var(--spacing-sm);
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-flex;
+  width: 60px;
+  height: 34px;
+  margin-bottom: var(--spacing-md);
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: var(--transition);
+  border-radius: 34px;
+}
+
+.toggle-slider::before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: var(--transition);
+  border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+  background-color: var(--color-primary-green);
+}
+
+input:checked + .toggle-slider::before {
+  transform: translateX(26px);
+}
+
+.about-section {
+  background-color: var(--color-text-light);
+  padding: var(--spacing-lg);
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+}
+
+.about-section a {
+  color: var(--color-primary-green);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.about-section a:hover {
+  text-decoration: underline;
+}
+
+/* ============================================
+   CROP BATCH MANAGEMENT
+   ============================================ */
+
+.batches-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+}
+
+.batch-card {
+  background-color: var(--color-text-light);
+  border-left: 4px solid var(--color-primary-green);
+  padding: var(--spacing-md);
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+}
+
+.batch-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.batch-crop-name {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-primary-green);
+}
+
+.batch-status {
+  background-color: var(--color-success);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.batch-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+  font-size: var(--font-size-sm);
+}
+
+.batch-detail-item {
+  background-color: var(--color-light-bg);
+  padding: var(--spacing-sm);
+  border-radius: 6px;
+}
+
+.batch-detail-label {
+  font-weight: 600;
+  color: var(--color-text-dark);
+}
+
+.batch-delete-btn {
+  background-color: var(--color-error);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-top: var(--spacing-md);
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================ */
+
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+
+  .main-container {
+    padding: var(--spacing-sm);
+  }
+
+  .navbar-menu {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-brand {
+    font-size: var(--font-size-lg);
+  }
+
+  .hero-title {
+    font-size: var(--font-size-xl);
+  }
+
+  .story-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .weather-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus styles for keyboard navigation */
+button:focus,
+input:focus,
+select:focus {
+  outline: 2px solid var(--color-primary-green);
+  outline-offset: 2px;
+}
+
+/* Screen reader only text */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

@@ -1,0 +1,54 @@
+{
+  "name": "কৃষক সহায়ক - বাংলাদেশী কৃষকদের জন্য কৃষি সহায়ক অ্যাপ",
+  "short_name": "কৃষক সহায়ক",
+  "description": "বাংলাদেশী কৃষকদের জন্য ডিজাইন করা একটি অফলাইন-প্রথম কৃষি সহায়ক অ্যাপ যা আবহাওয়া, ফসলের স্বাস্থ্য, বাজারদর এবং খরচ পরিচালনা প্রদান করে।",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#2D5016",
+  "background_color": "#F5F3F0",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect fill='%232D5016' width='192' height='192'/%3E%3Ctext x='96' y='140' font-size='100' fill='%23FFD700' text-anchor='middle'%3E🌾%3C/text%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 540 720'%3E%3Crect fill='%232D5016' width='540' height='720'/%3E%3Ctext x='270' y='360' font-size='80' fill='white' text-anchor='middle'%3E কৃষক সহায়ক %3C/text%3E%3C/svg%3E",
+      "sizes": "540x720",
+      "type": "image/svg+xml",
+      "form_factor": "narrow"
+    }
+  ],
+  "categories": ["agriculture", "productivity"],
+  "shortcuts": [
+    {
+      "name": "আবহাওয়া",
+      "short_name": "আবহাওয়া",
+      "description": "আজকের আবহাওয়া তথ্য দেখুন",
+      "url": "/?module=weather",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Ctext%3E🌤️%3C/text%3E%3C/svg%3E",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "খরচ হিসাব",
+      "short_name": "খরচ",
+      "description": "আপনার কৃষি খরচ ট্র্যাক করুন",
+      "url": "/?module=cost",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Ctext%3E💰%3C/text%3E%3C/svg%3E",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}
