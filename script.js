@@ -1203,3 +1203,7 @@ window.generateSmartAlert = function () {
     alert("সতর্কতা তৈরিতে সমস্যা হয়েছে। কনসোল দেখুন।");
   }
 };
+document.getElementById("alert-btn").addEventListener("click", function () {
+    alert("বাটন কাজ করছে!");
+});
+
