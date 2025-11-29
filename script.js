@@ -921,6 +921,7 @@ function toggleColorBlind() {
     localStorage.removeItem("color_blind_mode")
   }
 }
+window.toggleTextToSpeech = toggleTextToSpeech;
 
 function increaseFontSize() {
   let currentSize = Number.parseFloat(getComputedStyle(document.documentElement).fontSize)
