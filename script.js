@@ -1091,3 +1091,115 @@ function applyBanglaNumberStyling(htmlStr) {
   if (typeof htmlStr !== "string") return htmlStr
   return htmlStr.replace(/[०-९]+/g, (match) => `<span class="bn-number">${match}</span>`)
 }
+// =====================
+// Smart Alert System (B2)
+// =====================
+// Global function so button can call it from HTML
+window.generateSmartAlert = function () {
+  try {
+    // 1. Get farmer & batch info from your existing storage (fallback defaults)
+    const farmer = JSON.parse(localStorage.getItem(CONFIG.STORAGE_KEYS.FARMER) || "null");
+    const batches = JSON.parse(localStorage.getItem(CONFIG.STORAGE_KEYS.BATCHES) || "[]");
+    const weatherCache = JSON.parse(localStorage.getItem("weather_cache") || "null");
+
+    // Choose latest batch or fallback
+    const batch = (batches && batches.length) ? batches[batches.length - 1] : null;
+    const crop = batch ? (batch.cropType || "ধান") : "ধান";
+    const storageType = batch ? (batch.storageType || "পাটের বস্তা স্ট্যাক") : "পাটের বস্তা স্ট্যাক";
+
+    // Derive weather summary (if cached)
+    let temp = null, humidity = null, rainProb = null, locationName = "অজানা";
+    if (weatherCache && weatherCache.data) {
+      // try to read current/daily from cached Open-Meteo structure
+      const d = weatherCache.data;
+      // current temp & humidity
+      temp = d.current?.temperature_2m ?? d.current?.temperature ?? temp;
+      humidity = d.current?.relative_humidity_2m ?? d.current?.relative_humidity ?? humidity;
+      rainProb = d.daily?.precipitation_probability_max?.[0] ?? d.daily?.precipitation_probability_max ?? rainProb;
+      locationName = weatherCache.location || locationName;
+    }
+
+    // If weather not available, fill defaults
+    temp = (temp === null || temp === undefined) ? 33 : Math.round(Number(temp));
+    humidity = (humidity === null || humidity === undefined) ? 75 : Math.round(Number(humidity));
+    rainProb = (rainProb === null || rainProb === undefined) ? 30 : Math.round(Number(rainProb));
+
+    // 2. Neighbor influence (mock). Count mock High neighbors if you used map; else 0
+    // We'll look for a mock array 'mock_neighbors' in localStorage if present
+    const neighbors = JSON.parse(localStorage.getItem("mock_neighbors") || "[]"); // optional
+    const neighborHighCount = neighbors.filter(n => n.risk === "High" || n.risk === "উচ্চ").length;
+
+    // 3. Simple heuristic to determine risk level
+    let score = 0;
+    // storage risk
+    const storageRiskMap = { "পাটের বস্তা স্ট্যাক": 2, "সাইলো": 0, "খোলা স্থান": 3, "গুদাম": 1 };
+    score += storageRiskMap[storageType] ?? 2;
+    // humidity/temp/rain
+    if (humidity > 85) score += 4;
+    else if (humidity > 75) score += 3;
+    else if (humidity > 65) score += 1;
+    if (temp > 36) score += 3;
+    else if (temp > 33) score += 2;
+    if (rainProb > 70) score += 3;
+    else if (rainProb > 40) score += 1;
+    // neighbors
+    score += Math.min(3, neighborHighCount);
+
+    let risk = "Low";
+    if (score >= 10) risk = "Critical";
+    else if (score >= 7) risk = "High";
+    else if (score >= 4) risk = "Medium";
+
+    // 4. Build Bangla message (clear, short)
+    let messageParts = [];
+    messageParts.push(অবস্থান: ${locationName});
+    messageParts.push(ফসল: ${crop});
+    messageParts.push(সংরক্ষণ: ${storageType});
+    messageParts.push(তাপমাত্রা: ${temp}°C, আর্দ্রতা: ${humidity}%, বৃষ্টি সম্ভাব্যতা: ${rainProb}%);
+    messageParts.push(সমষ্টিগত ঝুঁকি স্তর: ${risk === "Critical" ? "ক্রিটিক্যাল (সতর্কতা)" : (risk === "High" ? "উচ্চ" : (risk === "Medium" ? "মাঝারি" : "কম"))});
+
+    // actionable advice
+    let advice = "";
+    if (rainProb > 70) advice += "আগামীকাল বৃষ্টি আসছে — ধান ঢেকে রাখুন কিংবা ভিতরে নিন। ";
+    if (temp > 35) advice += "তাপমাত্রা বেশী — গুদামে ভেন্টিলেশন/ফ্যান চালু করুন। ";
+    if (humidity > 80) advice += "উচ্চ আর্দ্রতা — সাবধানে শুকনো রাখুন, ফসল আলাদা রাখুন। ";
+    if (storageType === "পাটের বস্তা স্ট্যাক" && humidity > 75) advice += "পাটের বস্তায় আর্দ্রতা বাড়তে পারে — ঊর্ধ্বতন জোন মনিটর করুন। ";
+
+    if (risk === "Critical") {
+      advice += "এখানে জরুরি ব্যবস্থা নিন: আংশিক বিক্রি/শুকানো বা ভিতরে স্থানান্তর করুন। ";
+    } else if (risk === "High") {
+      advice += "৬০-৭২ ঘন্টার মধ্যে ঘন ঘন নজর রাখুন। ";
+    } else if (risk === "Medium") {
+      advice += "২৪-৪৮ ঘন্টার মধ্যে পর্যবেক্ষণ করুন। ";
+    } else {
+      advice += "নিয়মিত পর্যবেক্ষণ চালিয়ে যান। ";
+    }
+
+    // Final assembled message (Bangla)
+    const finalMessage = messageParts.join(" | ") + "\n\nপরামর্শ: " + advice;
+
+    // 5. Show to user (alert + UI + speak)
+    alert(finalMessage);
+
+    // If speakText exists, speak a short summary
+    if (typeof speakText === "function") {
+      speakText(ঝুঁকি স্তর: ${risk === "Critical" ? "ক্রিটিক্যাল" : (risk === "High" ? "উচ্চ" : (risk === "Medium" ? "মাঝারি" : "কম"))}. ${advice});
+    }
+
+    // 6. Simulate SMS in console if Critical
+    if (risk === "Critical") {
+      console.log("SIMULATED SMS -> To: " + (farmer?.phone || "ফার্মারের নম্বর"));
+      console.log("Message (Bangla): " + আপনার ফসল (${crop})-এ ক্রিটিক্যাল ঝুঁকি সনাক্ত হয়েছে। দ্রুত ব্যবস্থা নিন।);
+    }
+
+    // 7. Save last alert to localStorage (optional)
+    localStorage.setItem("last_smart_alert", JSON.stringify({
+      timestamp: new Date().toISOString(),
+      crop, storageType, temp, humidity, rainProb, risk, advice
+    }));
+
+  } catch (err) {
+    console.error("[SmartAlert] Error:", err);
+    alert("সতর্কতা তৈরিতে সমস্যা হয়েছে। কনসোল দেখুন।");
+  }
+};
