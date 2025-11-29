@@ -953,7 +953,22 @@ function toggleTextToSpeech() {
         }
     }
 }
-
+function toggleTextToSpeech() {
+    speechEnabled = !speechEnabled
+    localStorage.setItem("text_to_speech", speechEnabled)
+    
+    if (speechEnabled) {
+        alert("কণ্ঠস্বর চালু হয়েছে")
+        // Immediately speak a short message
+        speakText("আপনি এখন টেক্সট-টু-স্পীচ চালু করেছেন")
+    } else {
+        alert("কণ্ঠস্বর বন্ধ হয়েছে")
+        // Stop any ongoing speech
+        if ("speechSynthesis" in window) {
+            window.speechSynthesis.cancel()
+        }
+    }
+}
 function speakText(text) {
   if (!speechEnabled) return
   if ("speechSynthesis" in window) {
